@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import users from "../assets/data/users";
 import UserCard from "../src/components/UserCard";
 
@@ -7,8 +8,12 @@ import UserCard from "../src/components/UserCard";
 export default function Page() {
   return (
     <View style={styles.container}>
-      <UserCard user={users[0]} />
-      <UserCard user={users[1]} />
+      {/* <UserCard user={users[0]} /> */}
+      <FlatList
+        data={users}
+        renderItem={({ item }) => <UserCard user={item} />}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
