@@ -1,39 +1,53 @@
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
-
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  Pressable,
+} from "react-native";
+import { Link } from "expo-router";
 //const user = users[1];
 
 export default function UserCard({ user }) {
   //const user = props.user;
   //const { user } = props;
   return (
-    <ImageBackground source={{ uri: user.coverImage }} style={styles.userCard}>
-      <View style={styles.overlay} />
-      {/*I mage */}
-      <Image src={user.avatar} style={styles.userImage} />
-      {/*Image */}
-      <View>
-        <Text
-          style={{
-            color: "white",
-            fontSize: 22,
-            fontWeight: "500",
-            marginBottom: 5,
-          }}
+    <Link href={`/user/${user.id}`} asChild>
+      <Pressable>
+        <ImageBackground
+          source={{ uri: user.coverImage }}
+          style={styles.userCard}
         >
-          {user.name}
-        </Text>
-        <Text
-          style={{
-            color: "white",
-            fontSize: 12,
-            fontWeight: "400",
-            marginBottom: 5,
-          }}
-        >
-          {user.handle}
-        </Text>
-      </View>
-    </ImageBackground>
+          <View style={styles.overlay} />
+          {/*I mage */}
+          <Image src={user.avatar} style={styles.userImage} />
+          {/*Image */}
+          <View>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 22,
+                fontWeight: "500",
+                marginBottom: 5,
+              }}
+            >
+              {user.name}
+            </Text>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 12,
+                fontWeight: "400",
+                marginBottom: 5,
+              }}
+            >
+              @{user.handle}
+            </Text>
+          </View>
+        </ImageBackground>
+      </Pressable>
+    </Link>
   );
 }
 
