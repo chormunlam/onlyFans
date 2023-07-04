@@ -1,19 +1,8 @@
-# Expo Router Example
+![image](https://github.com/chormunlam/onlyFans/assets/71049920/ccc1bc2f-3d34-48df-aba6-d5c2175a3050)
+![image](https://github.com/chormunlam/onlyFans/assets/71049920/0f26484a-5302-4405-a19d-2b01297b19fb)
+![image](https://github.com/chormunlam/onlyFans/assets/71049920/bc797d1e-6e73-4766-a0ea-dddce16901b7)
+![image](https://github.com/chormunlam/onlyFans/assets/71049920/e6ecaaa9-7acb-485b-a2b6-70a1bd2f6105)
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
-
-## 🚀 How to use
-
-```sh
-npx create-expo-app -e with-router
-```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
-
----
 
 ![image](https://github.com/chormunlam/onlyFans/assets/71049920/1b8c0430-6947-4be2-a5b5-827bad368c0e)
 this is the homepage. and what l learned here,
