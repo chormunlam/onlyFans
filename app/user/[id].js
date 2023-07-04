@@ -1,17 +1,11 @@
-import {
-  View,
-  Text,
-  ImageBackground,
-  SafeAreaView,
-  Image,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useRouter, useSearchParams } from "expo-router";
 import users from "../../assets/data/users";
-import { StyleSheet } from "react-native-web";
-
+import posts from "../../assets/data/posts";
 import { useState } from "react";
 import UserProfileHeader from "../../src/components/UserProfileHeader";
+import Post from "../../src/components/Post";
+
 const ProfilePage = () => {
   const [isSub, setSub] = useState(false);
   const router = useRouter();
@@ -21,8 +15,17 @@ const ProfilePage = () => {
   if (!user) {
     return <Text>User not found!</Text>;
   }
-
-  return <UserProfileHeader user={user} isSub={isSub} setSub={setSub} />;
+  return (
+    <View>
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => <Post post={item} />}
+        ListHeaderComponent={() => (
+          <UserProfileHeader user={user} isSub={isSub} setSub={setSub} />
+        )}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({});
