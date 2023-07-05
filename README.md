@@ -68,3 +68,41 @@ still little confuse about css like
 
 for the profile header, learned Link and useRouter hook:
 router using Link, and onPress={() => router.back()}
+
+aws backend
+
+https://ui.docs.amplify.aws/react-native/getting-started/installation
+
+to get the dependcy/libary
+npx expo install @aws-amplify/ui-react-native aws-amplify react-native-safe-area-context @react-native-async-storage/async-storage @react-native-community/netinfo
+
+setup frontend:
+created \_layout.js in app folder,
+import { Amplify } from 'aws-amplify';
+import awsExports from './src/aws-exports';
+Amplify.configure(awsExports);
+
+auth easy way:
+https://ui.docs.amplify.aws/react-native/connected-components/authenticator
+npx expo
+install @aws-amplify/ui-react-native aws-amplify react-native-safe-area-context
+
+warp the stack like this:
+import { Stack } from "expo-router";
+import { Amplify } from "aws-amplify";
+import awsExports from "../src/aws-exports";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
+
+Amplify.configure(awsExports);
+export default function RootLayout() {
+return (
+<Authenticator.Provider>
+<Authenticator>
+<Stack screenOptions={{ headerShown: false }} />;
+</Authenticator>
+</Authenticator.Provider>
+);
+}
+
+need to npm install core-js for import "core-js/full/symbol/async-iterator";
+for data query.
