@@ -1,8 +1,15 @@
 import { Text, View, Image } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
+import { DataStore } from "aws-amplify";
+import { User } from "../models";
 
 const Post = ({ post }) => {
+  const [user, setUser] = useState();
+  useEffect(() => {
+    DataStore.query(User, post.userID).then(setUser);
+  }, []);
   return (
     <View style={{ marginVertical: 15 }}>
       <View
@@ -13,14 +20,14 @@ const Post = ({ post }) => {
         }}
       >
         <Image
-          src={post.User.avatar}
+          src={user?.avatar} //check if this null
           style={{ width: 50, aspectRatio: 1, borderRadius: 50 }}
         />
         <View>
           <Text style={{ fontWeight: "600", marginBottom: 3, fontSize: 16 }}>
-            {post.User.name}
+            {user?.name}
           </Text>
-          <Text style={{ color: "grey" }}>@{post.User.handle}</Text>
+          <Text style={{ color: "grey" }}>@{user?.handle}</Text>
         </View>
         <View
           style={{
@@ -39,7 +46,9 @@ const Post = ({ post }) => {
         </View>
       </View>
       <Text style={{ margin: 10, lineHeight: 18 }}>{post.text}</Text>
-      <Image src={post.image} style={{ width: "100%", aspectRatio: 1 }} />
+      {Post.image && (
+        <Image src={post.image} style={{ width: "100%", aspectRatio: 1 }} />
+      )}
       <View style={{ margin: 10, flexDirection: "row" }}>
         <Entypo
           name="heart-outlined"

@@ -7,21 +7,26 @@ import UserProfileHeader from "../../src/components/UserProfileHeader";
 import Post from "../../src/components/Post";
 import { Entypo } from "@expo/vector-icons";
 import { DataStore } from "aws-amplify";
-import { User } from "../../src/models";
+import { User, Post as PostModel } from "../../src/models";
 
 const ProfilePage = () => {
   const [user, setUser] = useState();
-  const [isSub, setSub] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [isSub, setSub] = useState(true);
   //const router = useRouter();
   const { id } = useSearchParams();
   //const user = users.find((u) => u.id === id);
   useEffect(() => {
     DataStore.query(User, id).then(setUser);
+    DataStore.query(PostModel, (post) => post.userID.eq(id)).then(setPosts);
   }, [id]);
 
   if (!user) {
     return <Text>User not found!</Text>;
   }
+
+  //console.log(JSON.stringify(user, null, 2));
+  console.log(posts);
 
   if (!isSub) {
     return (

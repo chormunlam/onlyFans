@@ -11,13 +11,24 @@ import { EvilIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { DataStore } from "aws-amplify";
+import { Post } from "../src/models";
+import { useAuthenticator } from "@aws-amplify/ui-react-native";
 const newPost = () => {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
-
+  const { user } = useAuthenticator();
   const router = useRouter();
-  const onPost = () => {
-    console.warn("Post", text);
+
+  const onPost = async () => {
+    console.warn("Post: ", text);
+    //console.log(JSON.stringify(user, null, 2));
+    //we see the sub id is inside the attributes,
+    //console.log(user.attributes.sub);
+    await DataStore.save(
+      new Post({ text, likes: 0, userID: user.attributes.sub })
+    ); //we got the user id relation in our post table
+    setText(""); //but we need to get user id form sign in layer
   };
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library

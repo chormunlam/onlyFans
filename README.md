@@ -1,22 +1,63 @@
-![image](https://github.com/chormunlam/onlyFans/assets/71049920/0f26484a-5302-4405-a19d-2b01297b19fb)
+# OnlyFans Clone
 
-- use Link to go to new post page
-  ![image](https://github.com/chormunlam/onlyFans/assets/71049920/ccc1bc2f-3d34-48df-aba6-d5c2175a3050)
-  what i learn in the new post page:
-- ues expo image pick
-- renter the text and image on the screen
+This is a clone of the popular content-sharing platform, OnlyFans, built using React Native and AWS Amplify.
 
-need to install image picker expo
+![Homepage Image](https://github.com/chormunlam/onlyFans/assets/71049920/0f26484a-5302-4405-a19d-2b01297b19fb)
 
-https://docs.expo.dev/versions/latest/sdk/imagepicker/
+## Installation and Configuration
 
-import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
-import \* as ImagePicker from 'expo-image-picker';
+To set up the project and its dependencies:
 
-export default function ImagePickerExample() {
-const [image, setImage] = useState(null);
+1. Clone the repository
+2. Run the following command to install dependencies:
 
+```bash
+npx expo install @aws-amplify/ui-react-native aws-amplify react-native-safe-area-context @react-native-async-storage/async-storage @react-native-community/netinfo
+```
+
+To configure AWS Amplify:
+import { Amplify } from 'aws-amplify';
+import awsExports from './src/aws-exports';
+Amplify.configure(awsExports);
+
+Install core-js for data querying:
+npm install core-js //otherwise wont work..
+
+AWS Amplify Authentication
+
+We used AWS Amplify for authentication. This was set up in the RootLayout function like so:
+import { Stack } from "expo-router";
+import { Amplify } from "aws-amplify";
+import awsExports from "../src/aws-exports";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
+
+Amplify.configure(awsExports);
+
+export default function RootLayout() {
+return (
+<Authenticator.Provider>
+<Authenticator>
+<Stack screenOptions={{ headerShown: false }} />;
+</Authenticator>
+</Authenticator.Provider>
+);
+}
+More about Amplify Authenticator can be found https://ui.docs.amplify.aws/react-native/connected-components/authenticator
+
+Profile Page
+
+Profile pages include features like negative margin utilization and bio generation using ChatGPT.
+https://github.com/chormunlam/onlyFans/assets/71049920/bc797d1e-6e73-4766-a0ea-dddce16901b7
+Learning
+Understanding and application of React Native component rendering and prop passing
+Utilization of FlatList for list rendering
+Confusion around CSS: like overlay positioning and the necessity of hidden overflow with border radius.
+
+New Post Creation
+
+The application allows the creation of new posts, and utilizes the Expo Image Picker for image uploading.
+
+To install the Image Picker Expo, visit https://docs.expo.dev/versions/latest/sdk/imagepicker/
 const pickImage = async () => {
 // No permissions request is necessary for launching the image library
 let result = await ImagePicker.launchImageLibraryAsync({
@@ -29,80 +70,71 @@ quality: 1,
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+        setImage(result.assets[0].uri);
     }
 
 };
 
-return (
-<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-<Button title="Pick an image from camera roll" onPress={pickImage} />
-{image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-</View>
-);
+Data Persistence
+
+Data persistence, such as saving user data to a database, is achieved using AWS Amplify's API module and GraphQL. Here's a sample mutation to create a user:
+
+mutation createUser($input: CreateUserInput!){
+  createUser(input:$input){
+id
+name
+handle
+bio
+subscriptionPrice
+}
 }
 
-![image](https://github.com/chormunlam/onlyFans/assets/71049920/bc797d1e-6e73-4766-a0ea-dddce16901b7)
+AWS Amplify provides a scalable backend for applications with authentication functionality, APIs, storage, and more.
 
-this is profile page:
-Learned:
+Once properly configured, AWS Amplify can emit events, indicating the successful configuration of the Auth module, seen as logs like:
+LOG {"channel":"auth","payload":{"event":"configured","data":null,"message":"The Auth category has been configured successfully"},"source":"Auth","patternInfo":[]}
 
-- use margin negative
-- use chatgpt to geneater bio for onlyfans......
-- use condition to let user view the post or go to locked page
+let i test to do input on the new post page: and print the uesr with authenatcation. it console out sth like :
+WARN Post: Fdfd
+LOG {"Session": null, "attributes": {"email": "chormunlam@yahoo.com.hk", "email_verified": true, "name": "Chormun Lam", "nickname": "chormun", "sub": "64c87488-70e1-703e-ff3d-629462ee602c"}, "authenticationFlowType": "USER_SRP_AUTH", "client": {"endpoint": "https://cognito-idp.us-east-1.amazonaws.com/", "fetchOptions": {}}, "keyPrefix": "CognitoIdentityServiceProvider.587pnvtuco1omi1ck1jnpb4sja", "pool": {"advancedSecurityDataCollectionFlag": true, "client": {"endpoint": "https://cognito-idp.us-east-1.amazonaws.com/", "fetchOptions": [Object]}, "clientId": "587pnvtuco1omi1ck1jnpb4sja", "storage": [Function MemoryStorage], "userPoolId": "us-east-1_J6XCYb7AE", "wrapRefreshSessionCallback": [Function anonymous]}, "preferredMFA": "NOMFA", "signInUserSession": {"accessToken": {"jwtToken": "eyJraWQiOiJxa3R5S0lHTTJFZllzSnhOZlRxQ0RFOG9IQWhwZnNsaU9SSHRQSXYrRlJnPSIsImFsZyI6IlJTMjU2In0.
 
-![image](https://github.com/chormunlam/onlyFans/assets/71049920/e6ecaaa9-7acb-485b-a2b6-70a1bd2f6105)
+too messy , let me do
+console.log(JSON.stringify(user, null, 2));
+WARN Post: Aaa
+LOG {
+"username": "64c87488-70e1-703e-ff3d-629462ee602c",
+"pool": {
+"userPoolId": "us-east-1_J6XCYb7AE",
+"clientId": "587pnvtuco1omi1ck1jnpb4sja",
+"client": {
+"endpoint": "https://cognito-idp.us-east-1.amazonaws.com/",
+"fetchOptions": {}
+},
+"advancedSecurityDataCollectionFlag": true
+},
+"Session": null,
+"client": {
+"endpoint": "https://cognito-idp.us-east-1.amazonaws.com/",
+"fetchOptions": {}
+},
+"signInUserSession": {
+"idToken": {
+"jwtToken": "eyJra
 
-![image](https://github.com/chormunlam/onlyFans/assets/71049920/1b8c0430-6947-4be2-a5b5-827bad368c0e)
-this is the homepage. and what l learned here,
-is render the component(function), and pass the prop form index.js (parent) to child (UserCard), and
+console.warn("Post: ", text);
+//console.log(JSON.stringify(user, null, 2));
+//we see the sub id is inside the attributes,
+console.log(user.attributes.sub);
 
-- desturct the prop.user as {user}
-- use FlatList to render list of item (array) to the screen.
-  <FlatList data={users} renderItem={({item})=><UserCard user={item} />/>
+// LOG 64c87488-70e1-703e-ff3d-629462ee602c
+await DataStore.save(new Post({ text, likes: 0, userID:user.attributes.sub }));
 
-still little confuse about css like
+and now we got saved post and need to linked with user.
+bug again:
+LOG [{"_deleted": null, "_lastChangedAt": 1688684104307, "_version": 1, "createdAt": "2023-07-06T22:55:04.281Z", "id": "a278c489-27d4-472d-a24a-ef3d582f4f83", "image": null, "likes": 0, "text": "Hello , this is testing first post form the simulator. ", "updatedAt": "2023-07-06T22:55:04.281Z", "userID": "64c87488-70e1-703e-ff3d-629462ee602c"}]
+ERROR TypeError: Cannot read property 'avatar' of undefined
 
-- where to put the overlay
-- why overflow need to be hidden when we do BoarderRadius.
-
-for the profile header, learned Link and useRouter hook:
-router using Link, and onPress={() => router.back()}
-
-aws backend
-
-https://ui.docs.amplify.aws/react-native/getting-started/installation
-
-to get the dependcy/libary
-npx expo install @aws-amplify/ui-react-native aws-amplify react-native-safe-area-context @react-native-async-storage/async-storage @react-native-community/netinfo
-
-setup frontend:
-created \_layout.js in app folder,
-import { Amplify } from 'aws-amplify';
-import awsExports from './src/aws-exports';
-Amplify.configure(awsExports);
-
-auth easy way:
-https://ui.docs.amplify.aws/react-native/connected-components/authenticator
-npx expo
-install @aws-amplify/ui-react-native aws-amplify react-native-safe-area-context
-
-warp the stack like this:
-import { Stack } from "expo-router";
-import { Amplify } from "aws-amplify";
-import awsExports from "../src/aws-exports";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
-
-Amplify.configure(awsExports);
-export default function RootLayout() {
-return (
-<Authenticator.Provider>
-<Authenticator>
-<Stack screenOptions={{ headerShown: false }} />;
-</Authenticator>
-</Authenticator.Provider>
-);
-}
-
-need to npm install core-js for import "core-js/full/symbol/async-iterator";
-for data query.
+This error is located at: in Post
+no user...
+let add some condition on the Post.js, make the avatoat , username, handler is null or not:
+post.User?.avatar
