@@ -6,8 +6,8 @@ HomePage using react native,
 
 ![Homepage Image](https://github.com/chormunlam/onlyFans/assets/71049920/0f26484a-5302-4405-a19d-2b01297b19fb)
 
-Final homepage:
-![image-20230707070847899](/Users/chormunlam/Library/Application Support/typora-user-images/image-20230707070847899.png)
+Final homepage:![image](https://github.com/chormunlam/onlyFans/assets/71049920/544c1f34-7afd-49ba-983b-a5a29e425715)
+
 
 ## Homepage Features
 
@@ -21,7 +21,8 @@ Final homepage:
 
   - UserCard: clickable and redirect to their profile page.
 
-  - ![image-20230707072838418](/Users/chormunlam/Library/Application Support/typora-user-images/image-20230707072838418.png)
+  - ![image](https://github.com/chormunlam/onlyFans/assets/71049920/2e0f4a38-24a7-4c4b-8ca1-6d97bb5fe8fc)
+
 
     - Import Statements:
 
@@ -82,7 +83,8 @@ Call [id].js in app folder, the id is for dynamic routing using dynamic paramete
 - Conditional(subscription status) rendering for viewing posts or a locked page(if not subscription)
 - Display their posts
 
-![image-20230707074319871](/Users/chormunlam/Library/Application Support/typora-user-images/image-20230707074319871.png)![image-20230707074337971](/Users/chormunlam/Library/Application Support/typora-user-images/image-20230707074337971.png)
+![image](https://github.com/chormunlam/onlyFans/assets/71049920/49f0f902-081e-49d1-b75a-ac61fa7bb305)
+
 
 - Notable imports include `View`, `Text`, `StyleSheet`, `FlatList` from `react-native`, and `useRouter`, `useSearchParams` from `expo-router`.
 
@@ -143,7 +145,8 @@ Call [id].js in app folder, the id is for dynamic routing using dynamic paramete
 
     - The `ListHeaderComponent` prop is used to render the `UserProfileHeader` component, which displays the user's profile information.
 
-      ![Profile Page Image](https://github.com/chormunlam/onlyFans/assets/71049920/bc797d1e-6e73-4766-a0ea-dddce16901b7)
+      ![image](https://github.com/chormunlam/onlyFans/assets/71049920/db54b604-4d2d-476e-a782-f96f891f4434)
+
 
 ## newPost page
 
@@ -397,3 +400,5 @@ Post-pull status:
 ├──────────┼───────────────────────────┼───────────┼───────────────────┤
 │ Storage │ s3onlyfansstorage1de8113a │ No Change │ awscloudformation │
 └──────────┴───────────────────────────┴───────────┴───────────────────┘
+
+![image](https://github.com/chormunlam/onlyFans/assets/71049920/ac8bd752-7a9b-447d-8d54-ae4a7afd6113)
