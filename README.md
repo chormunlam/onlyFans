@@ -142,3 +142,49 @@ post.User?.avatar
 ## now set up the aws Storage
 
 only sign in use can view , uplaod and delete
+
+do git push , the pull the amiply, now we got Storage,
+
+Successfully pulled backend environment staging from the cloud.
+✅
+✅ GraphQL schema compiled successfully.
+
+Edit your schema at /Users/chormunlam/Desktop/onlyFans/amplify/backend/api/OnlyFans/schema.graphql or place .graphql files in a directory at /Users/chormunlam/Desktop/onlyFans/amplify/backend/api/OnlyFans/schema
+Successfully generated models. Generated models can be found in /Users/chormunlam/Desktop/onlyFans/src
+Post-pull status:
+
+    Current Environment: staging
+
+┌──────────┬───────────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name │ Operation │ Provider plugin │
+├──────────┼───────────────────────────┼───────────┼───────────────────┤
+│ Api │ OnlyFans │ No Change │ awscloudformation │
+├──────────┼───────────────────────────┼───────────┼───────────────────┤
+│ Auth │ OnlyFans │ No Change │ awscloudformation │
+├──────────┼───────────────────────────┼───────────┼───────────────────┤
+│ Storage │ s3onlyfansstorage1de8113a │ No Change │ awscloudformation │
+└──────────┴───────────────────────────┴───────────┴───────────────────┘
+
+goto https://docs.amplify.aws/lib/storage/upload/q/platform/react-native/and go Stroage, Upload files
+
+after i got the upload file fucntin, we need to make the key unique, otherwise the new image will have the same name, and overwhite the existed image file. we can use uuid,
+https://www.npmjs.com/package/uuidv4
+npm install uuidv4
+async function uploadImage() {
+try {
+const response = await fetch(image);
+const blob = await response.blob();
+const fileKey=`${uuid()}.png`
+await Storage.put(fileKey, blob, {
+contentType: "image/jpeg", // contentType is optional
+});
+} catch (err) {
+console.log("Error uploading file:", err);
+}
+}
+
+not working...
+let use
+expo Crypto..
+% npx expo install expo-crypto
+import \* as Crypto from 'expo-crypto';

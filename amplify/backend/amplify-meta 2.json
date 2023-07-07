@@ -1,0 +1,90 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-onlyfans-staging-224120-authRole",
+      "UnauthRoleArn": "arn:aws:iam::969363821190:role/amplify-onlyfans-staging-224120-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::969363821190:role/amplify-onlyfans-staging-224120-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-onlyfans-staging-224120-deployment",
+      "UnauthRoleName": "amplify-onlyfans-staging-224120-unauthRole",
+      "StackName": "amplify-onlyfans-staging-224120",
+      "StackId": "arn:aws:cloudformation:us-east-1:969363821190:stack/amplify-onlyfans-staging-224120/e55fa040-1abb-11ee-93cd-0e9575e339a3",
+      "AmplifyAppId": "d1bdpl01ncv7bi"
+    }
+  },
+  "auth": {
+    "OnlyFans": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 6,
+          "passwordPolicyCharacters": []
+        },
+        "signupAttributes": [
+          "NAME",
+          "NICKNAME"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "us-east-1_J6XCYb7AE",
+        "AppClientIDWeb": "587pnvtuco1omi1ck1jnpb4sja",
+        "AppClientID": "32p8cle392rg9p40qa5b0altc",
+        "IdentityPoolId": "us-east-1:81381401-b01a-4340-832e-08098f6ec575",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:969363821190:userpool/us-east-1_J6XCYb7AE",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "OnlyFans"
+      },
+      "lastPushTimeStamp": "2023-07-05T00:38:13.532Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-onlyfans-staging-224120-deployment/amplify-cfn-templates/auth/OnlyFans-cloudformation-template.json",
+        "logicalId": "authOnlyFans"
+      }
+    }
+  },
+  "api": {
+    "OnlyFans": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "gkgbginplvhb3oyxlfnbyarsai",
+        "GraphQLAPIEndpointOutput": "https://3gyxiwwsxjel7m634jlsbvud6u.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-2xukqp73abc2bpdf37vybflr6e"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-onlyfans-staging-224120-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiOnlyFans"
+      },
+      "lastPushTimeStamp": "2023-07-05T00:38:13.534Z",
+      "lastPushDirHash": "TBN/TWJikpn4F7O1+Fzyp1t/scc="
+    }
+  }
+}
