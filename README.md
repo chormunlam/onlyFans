@@ -138,3 +138,7 @@ This error is located at: in Post
 no user...
 let add some condition on the Post.js, make the avatoat , username, handler is null or not:
 post.User?.avatar
+
+## now set up the aws Storage
+
+only sign in use can view , uplaod and delete
